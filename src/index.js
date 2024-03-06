@@ -6,26 +6,26 @@ app.use(express.json());
 app.use(cors());
 
 let listaProdutos = [
-  {
-    nome: "lapis",
-    preco: "5",
-  },
-  {
-    nome: "caderno",
-    preco: "10",
-  },
-  {
-    nome: "tesoura",
-    preco: "3",
-  },
-  {
-    nome: "cola",
-    preco: "2",
-  },
-  {
-    nome: "caneta",
-    preco: "2",
-  },
+  // {
+  //   nome: "lapis",
+  //   preco: 5,
+  // },
+  // {
+  //   nome: "caderno",
+  //   preco: 10,
+  // },
+  // {
+  //   nome: "tesoura",
+  //   preco: 3,
+  // },
+  // {
+  //   nome: "cola",
+  //   preco: 2,
+  // },
+  // {
+  //   nome: "caneta",
+  //   preco: 2,
+  // },
 ];
 
 app.post("/criar-produto", (req, res) => {
@@ -33,20 +33,37 @@ app.post("/criar-produto", (req, res) => {
   const nome = data.nome;
   const preco = data.preco;
 
-  listaProdutos.push({
-    nome,
-    preco,
-  });
+  try {
+    if (!nome || !preco) {
+      res.status(400).json({msg: "Erro ao cadastrar o produto"});
+    }
 
-  if (data.nome === "" || data.preco === "") {
-    res.status(400).json({msg: "Erro ao cadastrar o produto"});
+    let novoProduto = {
+      nome: nome,
+      preco: parseInt(preco),
+    };
+
+    listaProdutos.push(novoProduto);
+
+    res.status(201).json({msg: "Produto cadastrado com sucesso"});
+  } catch (error) {
+    res.status(500).json({msg: "Erro interno"});
   }
-
-  res.status(201).json({msg: "Produto cadastrado com sucesso"});
 });
 
 app.get("/produtos", (req, res) => {
-  res.status(200).json({msg: "Lista de produtos", data: listaProdutos});
+  try {
+    if (listaProdutos.length > 0) {
+      listaProdutos.map((produto) => {
+        return {nome: produto.nome, preco: produto.preco};
+      });
+      res.status(200).json({msg: listaProdutos});
+    } else {
+      res.status(200).json({msg: "Lista vazia"});
+    }
+  } catch (error) {
+    res.status(500).json({msg: "Erro interno"});
+  }
 });
 
 app.listen(8080, () => console.log("Servidor rodando na porta 8080"));
