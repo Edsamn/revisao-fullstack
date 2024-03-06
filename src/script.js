@@ -37,49 +37,49 @@
 
 //4
 
-// let nomeProduto;
-// let precoProduto;
-// let novoProduto = {
-//   nomeProduto,
-//   precoProduto,
-// };
-// let listaProdutos = [];
+let nomeProduto;
+let precoProduto;
+let novoProduto = {
+  nomeProduto,
+  precoProduto,
+};
+let listaProdutos = [];
 
-// function criarProduto(nome, preco) {
-//   novoProduto = {
-//     nomeProduto: nome,
-//     precoProduto: preco,
-//   };
-//   listaProdutos.push(novoProduto);
-// }
+function criarProduto(nome, preco) {
+  novoProduto = {
+    nomeProduto: nome,
+    precoProduto: preco,
+  };
+  listaProdutos.push(novoProduto);
+}
 
-// function lerProdutos() {
-//   listaProdutos.forEach((novoProduto) => {
-//     console.log(`Nome do produto: ${novoProduto.nomeProduto} | Preço do produto: ${novoProduto.precoProduto}`);
-//   });
-// }
+function lerProdutos() {
+  listaProdutos.forEach((novoProduto) => {
+    console.log(`Nome do produto: ${novoProduto.nomeProduto} | Preço do produto: ${novoProduto.precoProduto}`);
+  });
+}
 
-// function atualizarProduto(nome, nomeNovo, precoNovo) {
-//   listaProdutos
-//     .filter((novoProduto) => novoProduto.nomeProduto === nome)
-//     .map((novoProduto) => {
-//       (novoProduto.nomeProduto = nomeNovo), (novoProduto.precoProduto = precoNovo);
-//     });
-// }
+function atualizarProduto(nome, nomeNovo, precoNovo) {
+  listaProdutos
+    .filter((novoProduto) => novoProduto.nomeProduto === nome)
+    .map((novoProduto) => {
+      (novoProduto.nomeProduto = nomeNovo), (novoProduto.precoProduto = precoNovo);
+    });
+}
 
-// function deletarProduto(nome) {
-//   const produtoIndex = listaProdutos.findIndex((novoProduto) => novoProduto.nomeProduto === nome);
-//   listaProdutos.splice(produtoIndex, 1);
-// }
+function deletarProduto(nome) {
+  const produtoIndex = listaProdutos.findIndex((novoProduto) => novoProduto.nomeProduto === nome);
+  listaProdutos.splice(produtoIndex, 1);
+}
 
-// criarProduto("lapis", "2");
-// criarProduto("caneta", "3");
-// criarProduto("caderno", "6");
-// criarProduto("marca-texto", "7");
+criarProduto("lapis", "2");
+criarProduto("caneta", "3");
+criarProduto("caderno", "6");
+criarProduto("marca-texto", "7");
 // atualizarProduto("lapis", "tesoura", "5");
 // atualizarProduto("caneta", "cola", "3");
 // atualizarProduto("caderno", "folha", "0.5");
 // deletarProduto("marca-texto");
-// lerProdutos();
+lerProdutos();
 
 //--------------------------------------------------------------------------------------------------------------------
