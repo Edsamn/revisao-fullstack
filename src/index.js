@@ -54,12 +54,47 @@ app.post("/criar-produto", (req, res) => {
 app.get("/produtos", (req, res) => {
   try {
     if (listaProdutos.length > 0) {
-      listaProdutos.map((produto) => {
-        return {nome: produto.nome, preco: produto.preco};
-      });
       res.status(200).json({msg: listaProdutos});
     } else {
       res.status(200).json({msg: "Lista vazia"});
+    }
+  } catch (error) {
+    res.status(500).json({msg: "Erro interno"});
+  }
+});
+
+app.put("/produtos/:nome", (req, res) => {
+  const data = req.body;
+  const nome = req.params.nome;
+
+  try {
+    const produtoAtualizado = {
+      nome: data.nome,
+      preco: data.preco,
+    };
+
+    const produtoIndex = listaProdutos.findIndex((produto) => produto.nome === nome);
+    if (produtoIndex !== -1) {
+      listaProdutos[produtoIndex] = produtoAtualizado;
+      res.status(200).json({msg: "Produto atualizado com sucesso", data: listaProdutos});
+    } else {
+      res.status(400).json({msg: "Erro ao atualizar o produto"});
+    }
+  } catch (error) {
+    res.status(500).json({msg: "Erro interno"});
+  }
+});
+
+app.delete("/produtos/:nome", (req, res) => {
+  const nome = req.params.nome;
+
+  try {
+    const produtoIndex = listaProdutos.findIndex((produto) => produto.nome === nome);
+    if (produtoIndex !== -1) {
+      listaProdutos.splice(produtoIndex, 1);
+      res.status(200).json({msg: "Produto apagado com sucesso", data: listaProdutos});
+    } else {
+      res.status(400).json({msg: "Erro ao apagar o produto"});
     }
   } catch (error) {
     res.status(500).json({msg: "Erro interno"});
