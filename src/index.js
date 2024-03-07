@@ -34,7 +34,7 @@ app.post("/criar-produto", (req, res) => {
 app.get("/produtos", (req, res) => {
   try {
     if (listaProdutos.length > 0) {
-      return res.status(200).json({msg: listaProdutos});
+      return res.status(200).json({msg: "Lista de produtos", data: listaProdutos});
     } else {
       return res.status(200).json({msg: "Lista vazia"});
     }
