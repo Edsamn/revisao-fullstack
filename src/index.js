@@ -4,29 +4,9 @@ import cors from "cors";
 const app = express();
 app.use(express.json());
 app.use(cors());
+const port = 8080;
 
-let listaProdutos = [
-  // {
-  //   nome: "lapis",
-  //   preco: 5,
-  // },
-  // {
-  //   nome: "caderno",
-  //   preco: 10,
-  // },
-  // {
-  //   nome: "tesoura",
-  //   preco: 3,
-  // },
-  // {
-  //   nome: "cola",
-  //   preco: 2,
-  // },
-  // {
-  //   nome: "caneta",
-  //   preco: 2,
-  // },
-];
+let listaProdutos = [];
 
 app.post("/criar-produto", (req, res) => {
   const data = req.body;
@@ -101,4 +81,4 @@ app.delete("/produtos/:nome", (req, res) => {
   }
 });
 
-app.listen(8080, () => console.log("Servidor rodando na porta 8080"));
+app.listen(port, () => console.log("Servidor rodando na porta 8080"));
