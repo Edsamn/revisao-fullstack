@@ -15,7 +15,7 @@ app.post("/criar-produto", (req, res) => {
 
   try {
     if (!nome || !preco) {
-      res.status(400).json({msg: "Erro ao cadastrar o produto"});
+      return res.status(400).json({msg: "Erro ao cadastrar o produto"});
     }
 
     let novoProduto = {
@@ -25,21 +25,21 @@ app.post("/criar-produto", (req, res) => {
 
     listaProdutos.push(novoProduto);
 
-    res.status(201).json({msg: "Produto cadastrado com sucesso"});
+    return res.status(201).json({msg: "Produto cadastrado com sucesso"});
   } catch (error) {
-    res.status(500).json({msg: "Erro interno"});
+    return res.status(500).json({msg: "Erro interno"});
   }
 });
 
 app.get("/produtos", (req, res) => {
   try {
     if (listaProdutos.length > 0) {
-      res.status(200).json({msg: listaProdutos});
+      return res.status(200).json({msg: listaProdutos});
     } else {
-      res.status(200).json({msg: "Lista vazia"});
+      return res.status(200).json({msg: "Lista vazia"});
     }
   } catch (error) {
-    res.status(500).json({msg: "Erro interno"});
+    return res.status(500).json({msg: "Erro interno"});
   }
 });
 
@@ -56,12 +56,12 @@ app.put("/produtos/:nome", (req, res) => {
     const produtoIndex = listaProdutos.findIndex((produto) => produto.nome === nome);
     if (produtoIndex !== -1) {
       listaProdutos[produtoIndex] = produtoAtualizado;
-      res.status(200).json({msg: "Produto atualizado com sucesso", data: listaProdutos});
+      return res.status(200).json({msg: "Produto atualizado com sucesso", data: listaProdutos});
     } else {
-      res.status(400).json({msg: "Erro ao atualizar o produto"});
+      return res.status(400).json({msg: "Erro ao atualizar o produto"});
     }
   } catch (error) {
-    res.status(500).json({msg: "Erro interno"});
+    return res.status(500).json({msg: "Erro interno"});
   }
 });
 
@@ -72,12 +72,12 @@ app.delete("/produtos/:nome", (req, res) => {
     const produtoIndex = listaProdutos.findIndex((produto) => produto.nome === nome);
     if (produtoIndex !== -1) {
       listaProdutos.splice(produtoIndex, 1);
-      res.status(200).json({msg: "Produto apagado com sucesso", data: listaProdutos});
+      return res.status(200).json({msg: "Produto apagado com sucesso", data: listaProdutos});
     } else {
-      res.status(400).json({msg: "Erro ao apagar o produto"});
+      return res.status(400).json({msg: "Erro ao apagar o produto"});
     }
   } catch (error) {
-    res.status(500).json({msg: "Erro interno"});
+    return res.status(500).json({msg: "Erro interno"});
   }
 });
 
