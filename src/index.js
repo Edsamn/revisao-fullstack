@@ -3,8 +3,9 @@ import cors from "cors";
 
 const app = express();
 app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 app.use(cors());
-const port = 8080;
+const PORT = 8080;
 
 let listaProdutos = [];
 
@@ -81,4 +82,4 @@ app.delete("/produtos/:nome", (req, res) => {
   }
 });
 
-app.listen(port, () => console.log("Servidor rodando na porta 8080"));
+app.listen(PORT, () => console.log("Servidor rodando na porta 8080"));
